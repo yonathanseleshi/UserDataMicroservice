@@ -6,10 +6,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using UserDataMicroserviceAPI.Models;
+using UserDataMicroserviceAPI.Repositories;
 
 namespace UserDataMicroserviceAPI
 {
@@ -26,6 +29,10 @@ namespace UserDataMicroserviceAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddDbContext<UserDbContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("UserDatabase")));
+            services.AddTransient<IUserCrudRepository, UserCrudRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
