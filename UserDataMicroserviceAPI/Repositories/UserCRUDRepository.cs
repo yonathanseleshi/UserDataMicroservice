@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,22 +9,18 @@ namespace UserDataMicroserviceAPI.Repositories
 {
     public class UserCrudRepository : IUserCrudRepository
     {
-        private UserDbContext _context;
+        private readonly UserDbContext _context;
 
         public UserCrudRepository(UserDbContext context)
         {
-
             _context = context;
-
-
         }
 
-        public async Task<ActionResult<User>> GetUser(long userid)
+        public async Task<ActionResult<User>> GetUser(string userid)
         {
             var user = await _context.Users.FindAsync(userid);
 
             return user;
-
         }
 
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
@@ -37,17 +32,12 @@ namespace UserDataMicroserviceAPI.Repositories
 
         public async Task<ActionResult<User>> PostUser(User user)
         {
-          
             _context.Users.Add(user);
-          var result = await _context.SaveChangesAsync();
+            var result = await _context.SaveChangesAsync();
 
-            if (result == 1)
-            {
-                return new ActionResult<User>(user);
-            }
+            if (result == 1) return new ActionResult<User>(user);
 
             return user;
-
         }
 
         public async Task<ActionResult<User>> CheckUsername(string username)

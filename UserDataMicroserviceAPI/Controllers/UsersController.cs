@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using UserDataMicroserviceAPI.Models;
 using UserDataMicroserviceAPI.Repositories;
 
@@ -12,15 +10,11 @@ namespace UserDataMicroserviceAPI.Controllers
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
-
-        private IUserCrudRepository _crudRepository;
+        private readonly IUserCrudRepository _crudRepository;
 
         public UsersController(IUserCrudRepository crudRepository)
         {
-
             _crudRepository = crudRepository;
-
-
         }
 
         // GET: api/<controller>
@@ -34,14 +28,10 @@ namespace UserDataMicroserviceAPI.Controllers
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(long id)
+        public async Task<ActionResult<User>> GetUser(string id)
         {
             var user = await _crudRepository.GetUser(id);
-            if (user == null)
-            {
-                return NotFound();
-
-            }
+            if (user == null) return NotFound();
 
             return Ok(user);
         }
@@ -51,12 +41,8 @@ namespace UserDataMicroserviceAPI.Controllers
         public async Task<ActionResult<User>> GetUsername(string username)
         {
             var user = await _crudRepository.CheckUsername(username);
-            
-            if (user == null)
-            {
-                return NotFound();
 
-            }
+            if (user == null) return NotFound();
 
             return Ok(user);
         }
@@ -65,17 +51,16 @@ namespace UserDataMicroserviceAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            var userID = new Guid();
+            var userId = new Guid();
             var createdAt = DateTime.UtcNow;
-            user.UserId = userID;
-            user.ProfileCreated = createdAt;
+            user.UserId = userId;
+            user.RegsitrationDate = createdAt;
             user.LastUpdated = createdAt;
 
 
             if (TryValidateModel(user))
             {
-             var result = await _crudRepository.PostUser(user);
-
+                var result = await _crudRepository.PostUser(user);
             }
             else
             {
@@ -83,13 +68,11 @@ namespace UserDataMicroserviceAPI.Controllers
             }
 
             return CreatedAtAction(nameof(GetUser), new {id = user.UserId}, user);
-
-
         }
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody] string user)
         {
         }
 
@@ -97,6 +80,7 @@ namespace UserDataMicroserviceAPI.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            
         }
     }
 }
