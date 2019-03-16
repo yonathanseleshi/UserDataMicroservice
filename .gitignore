@@ -45,6 +45,10 @@ project.lock.json
 project.fragment.lock.json
 artifacts/
 
+#Project Settings
+appsettings.json
+appsettings.Development.json
+
 *_i.c
 *_p.c
 *_i.h

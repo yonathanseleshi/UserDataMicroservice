@@ -101,7 +101,7 @@ namespace UserDataMicroserviceAPI.Models
         public string Password
         {
             get => password;
-            set => password = value;
+            set => password = GeneratePasswordHash(value);
         }
 
         public string Bio

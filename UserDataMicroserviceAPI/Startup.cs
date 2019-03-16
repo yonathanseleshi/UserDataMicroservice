@@ -47,7 +47,7 @@ namespace UserDataMicroserviceAPI
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services, IHostingEnvironment env)
+        public void ConfigureServices(IServiceCollection services)
         {
             
             //Establish the CORS Policy
@@ -64,20 +64,25 @@ namespace UserDataMicroserviceAPI
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            
+            
+            
+            services.AddDbContext<UserDbContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("DevDatabase")));
+            /*
             if (env.IsDevelopment())
             {
-                services.AddDbContext<UserDbContext>(options =>
-                    options.UseNpgsql(Configuration.GetConnectionString("DevDatabase")));
                 
+                services.AddDbContext<UserDbContext>(options =>
+                options.UseNpgsql(GetDBConnectionString()));
             }
             else
             {
-                services.AddDbContext<UserDbContext>(options =>
-                    options.UseNpgsql(GetDBConnectionString()));
+                
 
             }
 
-            
+            */
           
             services.AddTransient<IUserCrudRepository, UserCrudRepository>();
             

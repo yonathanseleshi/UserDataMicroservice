@@ -51,23 +51,33 @@ namespace UserDataMicroserviceAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            
+            User newUser = new User();
+            string password = user.Password;
             var userId = new Guid();
             var createdAt = DateTime.UtcNow;
-            user.UserId = userId;
-            user.RegsitrationDate = createdAt;
-            user.LastUpdated = createdAt;
+            newUser.UserId = userId;
+            newUser.RegsitrationDate = createdAt;
+            newUser.LastUpdated = createdAt;
+            newUser.FirstName = user.FirstName;
+            newUser.LastName = user.LastName;
+            newUser.Password = password;
+            newUser.Email = user.Email;
+            newUser.Username = user.Username;
+            newUser.Bio = user.Bio;
+         
 
 
-            if (TryValidateModel(user))
+            if (TryValidateModel(newUser))
             {
-                var result = await _crudRepository.PostUser(user);
+                var result = await _crudRepository.PostUser(newUser);
             }
             else
             {
-                return BadRequest(User);
+                return BadRequest(newUser);
             }
 
-            return CreatedAtAction(nameof(GetUser), new {id = user.UserId}, user);
+            return CreatedAtAction(nameof(GetUser), new {id = newUser.UserId}, newUser);
         }
 
         // PUT api/<controller>/5
