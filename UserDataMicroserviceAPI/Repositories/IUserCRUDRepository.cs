@@ -15,5 +15,10 @@ namespace UserDataMicroserviceAPI.Repositories
         Task<ActionResult<User>> PostUser(User user);
 
         Task<ActionResult<User>> CheckUsername(string username);
+
+        Task<ActionResult<User>> UpdateUser(User user);
+        
+        void DeleteUser(User user);
+
     }
 }

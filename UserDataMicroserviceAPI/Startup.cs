@@ -65,16 +65,16 @@ namespace UserDataMicroserviceAPI
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             
-            
-            
             services.AddDbContext<UserDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("DevDatabase")));
+                options.UseNpgsql(GetDBConnectionString()));
+            
+            
             /*
             if (env.IsDevelopment())
             {
                 
                 services.AddDbContext<UserDbContext>(options =>
-                options.UseNpgsql(GetDBConnectionString()));
+                options.UseNpgsql(Configuration.GetConnectionString("DevDatabase")));
             }
             else
             {

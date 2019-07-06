@@ -46,5 +46,22 @@ namespace UserDataMicroserviceAPI.Repositories
 
             return user;
         }
+        
+        public async Task<ActionResult<User>> UpdateUser(User user)
+        {
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
+        
+        
+        public void DeleteUser(User user)
+        {
+            _context.Users.Remove(user);
+             _context.SaveChangesAsync();
+
+            
+        }
     }
 }

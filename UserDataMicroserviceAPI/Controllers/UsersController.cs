@@ -11,10 +11,13 @@ namespace UserDataMicroserviceAPI.Controllers
     public class UsersController : Controller
     {
         private readonly IUserCrudRepository _crudRepository;
+        
+        private readonly UserDbContext _context;
 
-        public UsersController(IUserCrudRepository crudRepository)
+        public UsersController(IUserCrudRepository crudRepository, UserDbContext context)
         {
             _crudRepository = crudRepository;
+            _context = context;
         }
 
         // GET: api/<controller>
@@ -82,15 +85,35 @@ namespace UserDataMicroserviceAPI.Controllers
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string user)
+        public async Task<IActionResult> Put(string id, User user)
         {
+            
+            if (id != user.UserId.ToString())
+            {
+                return BadRequest();
+            }
+
+           await _crudRepository.UpdateUser(user);
+           
+           return CreatedAtAction(nameof(GetUser), new {id = user.UserId}, user);
+
         }
 
         // DELETE api/<controller>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
             
+            var user = await _context.Users.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            
+            _crudRepository.DeleteUser(user);
+
+            return Accepted();
         }
     }
 }
