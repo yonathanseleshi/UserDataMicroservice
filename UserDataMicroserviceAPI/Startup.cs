@@ -25,13 +25,13 @@ namespace UserDataMicroserviceAPI
 
 
             // Using UsWest2
-            var ssmClient = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoint.USWest2);
+            var ssmClient = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoint.USWest1);
 
         
             var response = ssmClient.GetParameterAsync(new GetParameterRequest
             {
-                Name = "airespringendpoint",
-                WithDecryption = true
+                Name = "somulecodevdbconnectionstring",
+                WithDecryption = false
             });
 
             return response.Result.Parameter.Value;

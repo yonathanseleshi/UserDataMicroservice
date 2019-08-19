@@ -28,10 +28,15 @@ namespace UserDataMicroserviceAPI.Models
         [Required]
         private string email;
 
-        
+        [Phone]
+        private int phoneNumber;
+
         [Required]
         [MinLength(4), MaxLength(30)]
         private string username;
+
+
+        private string profileImageUrl;
 
         private string password;
 
@@ -121,6 +126,16 @@ namespace UserDataMicroserviceAPI.Models
             get => lastUpdated;
             set => lastUpdated = value;
         }
+
+        public int PhoneNumber
+        {
+            get => phoneNumber;
+            set => phoneNumber = value;
+        }
+
+
+        public string ProfileImageUrl { get => profileImageUrl; set => profileImageUrl = value; }
+
 
 
         private string GeneratePasswordHash(string userPassword)
