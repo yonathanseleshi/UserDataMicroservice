@@ -45,4 +45,7 @@
     <Content Remove="DAOs\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
 </Project>
