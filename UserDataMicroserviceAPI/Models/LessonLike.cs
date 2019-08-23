@@ -1,9 +1,9 @@
 ﻿using System;
 namespace UserDataMicroserviceAPI.Models
 {
-    public class Like
+    public class LessonLike
     {
-        public Like()
+        public LessonLike()
         {
         }
     }

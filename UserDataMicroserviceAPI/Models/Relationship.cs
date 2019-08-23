@@ -3,8 +3,20 @@ namespace UserDataMicroserviceAPI.Models
 {
     public class Relationship
     {
-        public Relationship()
-        {
-        }
+       
+        private Guid relationshipId;
+
+        private Guid userId;
+
+        private Guid followerId;
+
+        private User following;
+
+        private User follower;
+
+
+        private DateTime followDate;
+
+       
     }
 }

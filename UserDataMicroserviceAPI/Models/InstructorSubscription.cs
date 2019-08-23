@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace UserDataMicroserviceAPI.Models
 {
-    public class Subscription
+    public class InstructorSubscription
     {
 
         [Key]
@@ -11,11 +12,12 @@ namespace UserDataMicroserviceAPI.Models
         private Guid subscriptionId;
 
         [Required]
-        private Guid subscriberId;
+        private Guid instructorId;
 
-        private DateTime lastPurchaseDate;
+        [Required]
+        private Guid userId;
 
-
+        private DateTime lastPaymentDate;
 
 
 

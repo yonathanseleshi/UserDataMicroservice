@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UserDataMicroserviceAPI.Models;
 using UserDataMicroserviceAPI.Repositories;
+using UserDataMicroserviceAPI.Repositories.Interfaces;
 
 namespace UserDataMicroserviceAPI
 {
@@ -84,8 +85,35 @@ namespace UserDataMicroserviceAPI
 
             */
           
-            services.AddTransient<IUserCrudRepository, UserCrudRepository>();
-            
+            services.AddSingleton<IUserCrudRepository, UserCrudRepository>();
+            services.AddSingleton<IChatRepo, ChatRepo>();
+            services.AddSingleton<ICommentRepo, CommentRepo>();
+            services.AddSingleton<ICourseRepo, CourseRepo>();
+            services.AddSingleton<IEnrollmentRepo, EnrollmentRepo>();
+            services.AddSingleton<IFavoriteRepo, FavoriteRepo>();
+            services.AddSingleton<IInspirationRepo, InspirationRepo>();
+            services.AddSingleton<ILessonRepo, LessonRepo>();
+            services.AddSingleton<INotificationRepo, NotificationRepo>();
+            services.AddSingleton<PlaylistRepo, PlaylistRepo>();
+            services.AddSingleton<IPoolRepo, PoolRepo>();
+            services.AddSingleton<IRecommendedCourseRepo, RecommendedCourseRepo>();
+            services.AddSingleton<IRecommendedInstructorRepo, RecommendedInstructorRepo>();
+            services.AddSingleton<IRecommendedJobRepo, RecommendedJobRepo>();
+            services.AddSingleton<IRecommendedPostRepo, RecommendedPostRepo>();
+            services.AddSingleton<IRecommendedProjectRepo, RecommendedProjectRepo>();
+            services.AddSingleton<IRecommendedSchoolRepo, RecommendedSchoolRepo>();
+            services.AddSingleton<IRecommendedUserRepo, RecommendedUserRepo>();
+            services.AddSingleton<IRelationshipRepo, RelationshipRepo>();
+            services.AddSingleton<IReviewRepo, ReviewRepo>();
+            services.AddSingleton<ISocialPostRepo, SocialPostRepo>();
+            services.AddSingleton<ISubscriptionRepo, SubscriptionRepo>();
+            services.AddSingleton<ITransactionRepo, TransactionRepo>();
+            services.AddSingleton<IWalletRepo, WalletRepo>();
+            services.AddSingleton<IWishlistRepo, WishlistRepo>();
+
+
+
+
             services.Configure<PasswordHasherOptions>(option =>
             {
                 option.IterationCount = 12000;

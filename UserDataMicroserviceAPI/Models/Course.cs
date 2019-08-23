@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-
+using System.Collections.Generic;
 
 namespace UserDataMicroserviceAPI.Models
 {
@@ -24,6 +24,12 @@ namespace UserDataMicroserviceAPI.Models
         private DateTime createdDate;
 
         private string primarySubject;
+
+
+
+        private List<Lesson> lessons;
+
+
 
         public ulong CourseId { get => courseId; set => courseId = value; }
         public string CourseName { get => courseName; set => courseName = value; }

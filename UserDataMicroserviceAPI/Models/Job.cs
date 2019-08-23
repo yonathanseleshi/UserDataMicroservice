@@ -1,9 +1,9 @@
 ﻿using System;
 namespace UserDataMicroserviceAPI.Models
 {
-    public class Comment
+    public class Job
     {
-        public Comment()
+        public Job()
         {
         }
     }

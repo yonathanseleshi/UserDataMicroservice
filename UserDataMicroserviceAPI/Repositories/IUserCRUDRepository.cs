@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,7 @@ namespace UserDataMicroserviceAPI.Repositories
     {
         Task<ActionResult<User>> GetUser(string userid);
 
-        Task<ActionResult<IEnumerable<User>>> GetUsers();
+        Task<ActionResult<IQueryable<User>>> GetUsers();
 
         Task<ActionResult<User>> PostUser(User user);
 
